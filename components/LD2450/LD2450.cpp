@@ -78,7 +78,6 @@ namespace esphome::ld2450
 
         // Read and log Firmware-version
         log_sensor_version();
-        log_bluetooth_mac();
     }
 
     const uint8_t update_header[4] = {0xAA, 0xFF, 0x03, 0x00};
