@@ -92,11 +92,7 @@ namespace esphome::ld2450
             // Process command queue
             if (command_queue_.size() > 0)
             {
-                // Inject enter config mode command if not in mode
-                if (!configuration_mode_ && command_queue_.front()[0] != COMMAND_ENTER_CONFIG)
-                {
-                    command_queue_.insert(command_queue_.begin(), {COMMAND_ENTER_CONFIG, 0x00, 0x01, 0x00});
-                }
+            
 
                 // Wait before retransmitting
                 if (millis() - command_last_sent_ > COMMAND_RETRY_DELAY)
