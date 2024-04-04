@@ -131,8 +131,8 @@ namespace esphome::ld2450
             }
             else if (configuration_mode_)
             {
-                // Inject leave config command after clearing the queue
-                command_queue_.push_back({COMMAND_LEAVE_CONFIG, 0x00});
+                const uint8_t read_version[6] = {0x44, 0x11, 0x00, 0x00, 0x55, 0x00};
+                send_config_message(read_version, 6);
                 command_send_retries_ = 0;
             }
         }
