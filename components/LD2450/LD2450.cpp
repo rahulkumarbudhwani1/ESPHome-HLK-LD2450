@@ -396,7 +396,7 @@ namespace esphome::ld2450
     void LD2450::log_sensor_version()
     {
         const uint8_t read_version[6] = {0x44, 0x11, 0x00, 0x00, 0x55, 0x00};
-        send_config_message(read_version, 2);
+        send_config_message(read_version, 6);
     }
 
     void LD2450::log_bluetooth_mac()
