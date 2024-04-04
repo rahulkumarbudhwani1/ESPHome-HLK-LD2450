@@ -455,11 +455,7 @@ namespace esphome::ld2450
 
     void LD2450::write_command(uint8_t *msg, int len)
     {
-        
-
-        // Write message length
-        write(static_cast<uint8_t>(len));
-        write(static_cast<uint8_t>(len >> 8));
+    
 
         // Write message content
         write_array(msg, len);
