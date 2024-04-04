@@ -44,7 +44,7 @@ namespace esphome::ld2450
                                                          { this->perform_factory_reset(); });
 #endif
         // Acquire current switch states and update related components
-        read_switch_states();
+        //read_switch_states();
     }
 
     void LD2450::dump_config()
