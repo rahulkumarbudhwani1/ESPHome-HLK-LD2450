@@ -455,8 +455,7 @@ namespace esphome::ld2450
 
     void LD2450::write_command(uint8_t *msg, int len)
     {
-        // Write frame header
-        write_array({0xFD, 0xFC, 0xFB, 0xFA});
+        
 
         // Write message length
         write(static_cast<uint8_t>(len));
@@ -465,8 +464,7 @@ namespace esphome::ld2450
         // Write message content
         write_array(msg, len);
 
-        // Write frame end
-        write_array({0x04, 0x03, 0x02, 0x01});
+       
 
         flush();
     }
