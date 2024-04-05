@@ -41,17 +41,7 @@ namespace esphome::ld2450
         ESP_LOGCONFIG(TAG, "  flip_x_axis: %s", flip_x_axis_ ? "True" : "False");
         ESP_LOGCONFIG(TAG, "  max_detection_distance: %i mm", max_detection_distance_);
         ESP_LOGCONFIG(TAG, "  max_distance_margin: %i mm", max_distance_margin_);
-        LOG_SWITCH("  ", "TrackingModeSwitch", tracking_mode_switch_);
-        LOG_SWITCH("  ", "BluetoothSwitch", bluetooth_switch_);
         LOG_SELECT("  ", "BaudRateSelect", baud_rate_select_);
-        ESP_LOGCONFIG(TAG, "Zones:");
-        if (zones_.size() > 0)
-        {
-            for (Zone *zone : zones_)
-            {
-                zone->dump_config();
-            }
-        }
 
         // Read and log Firmware-version
         log_sensor_version();
