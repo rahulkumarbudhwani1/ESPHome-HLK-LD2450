@@ -41,16 +41,6 @@ namespace esphome::ld2450
         ESP_LOGCONFIG(TAG, "  flip_x_axis: %s", flip_x_axis_ ? "True" : "False");
         ESP_LOGCONFIG(TAG, "  max_detection_distance: %i mm", max_detection_distance_);
         ESP_LOGCONFIG(TAG, "  max_distance_margin: %i mm", max_distance_margin_);
-#ifdef USE_BINARY_SENSOR
-        LOG_BINARY_SENSOR("  ", "OccupancyBinarySensor", occupancy_binary_sensor_);
-#endif
-#ifdef USE_NUMBER
-        LOG_NUMBER("  ", "MaxDistanceNumber", max_distance_number_);
-#endif
-#ifdef USE_BUTTON
-        LOG_BUTTON("  ", "RestartButton", restart_button_);
-        LOG_BUTTON("  ", "FactoryResetButton", factory_reset_button_);
-#endif
         LOG_SWITCH("  ", "TrackingModeSwitch", tracking_mode_switch_);
         LOG_SWITCH("  ", "BluetoothSwitch", bluetooth_switch_);
         LOG_SELECT("  ", "BaudRateSelect", baud_rate_select_);
