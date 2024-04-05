@@ -216,7 +216,6 @@ namespace esphome::ld2450
             command_send_retries_ = 0;
             configuration_mode_ = true;
             command_queue_.clear();
-            command_queue_.push_back({COMMAND_LEAVE_CONFIG, 0x00});
         }
 
         if (available() != last_available_size_)
