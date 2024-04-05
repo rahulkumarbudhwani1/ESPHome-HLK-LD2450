@@ -8,7 +8,7 @@ namespace esphome::ld2450
 
     void LD2450::setup()
     {
-
+        ESP_LOGI(TAG, "Trial to test");
         // Fill target list with mock targets if not present
         for (int i = targets_.size(); i < 3; i++)
         {
