@@ -150,23 +150,26 @@ namespace esphome::ld2450
                 const uint8_t *header;
                 bool skip = false;
                 uint8_t message_type;
+                uint8_t header_len ;
                 uint8_t first_byte = read();
                 if (first_byte == update_header[0])
                 {
                     header = update_header;
                     message_type = 1;
+                    header_len = 2;
                 }
                 else if (first_byte == config_header[0])
                 {
                     header = config_header;
                     message_type = 2;
+                    header_len = 4;
                 }
                 else
                 {
                     skip = true;
                 }
 
-                for (int i = 1; i < 4 && !skip; i++)
+                for (int i = 1; i < header_len && !skip; i++)
                 {
                     if (read() != header[i])
                         skip = true;
