@@ -81,7 +81,7 @@ namespace esphome::ld2450
     }
 
     const uint8_t update_header[4] = {0xAA, 0xFF, 0x03, 0x00};
-    const uint8_t config_header[4] = {0xFD, 0xFC, 0xFB, 0xFA};
+    const uint8_t config_header[4] = {0x4D, 0x11, 0x08, 0x00};
     void LD2450::loop()
     {
         // Only process commands if the sensor is not currently restarting / applying changes
