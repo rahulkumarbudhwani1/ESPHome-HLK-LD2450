@@ -206,25 +206,6 @@ namespace esphome::ld2450
 
         } while (processed_message);
 
-        // Detect missing updates from the sensor (not connect or in configuration mode)
-        if (sensor_available_ && millis() - last_message_received_ > SENSOR_UNAVAILABLE_TIMEOUT)
-        {
-            sensor_available_ = false;
-
-            ESP_LOGE(TAG, "LD2450-Sensor stopped sending updates!");
-
-            // Update zones and related components (unavailable)
-            for (Zone *zone : zones_)
-            {
-                zone->update(targets_, sensor_available_);
-            }
-
-            // Update targets and related components (unavailable)
-            for (Target *target : targets_)
-            {
-                target->clear();
-            }
-        }
 
         // Assume the sensor is in it's configuration mode, attempt to leave
         // Attempt to leave config mode periodically if the sensor is not sending updates
