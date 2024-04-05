@@ -180,17 +180,13 @@ namespace esphome::ld2450
                     peek_status_ = message_type;
             }
 
-            if (peek_status_ == 1 && available() >= 26)
+            if (peek_status_ == 1 && available() >= 10)
             {
-                uint8_t msg[26] = {0x00};
-                read_array(msg, 26);
+                uint8_t msg[10] = {0x00};
+                read_array(msg, 10);
                 peek_status_ = 0;
 
-                // Skip invalid messages
-                if (msg[24] != 0x55 || msg[25] != 0xCC)
-                    return;
-
-                process_message(msg, 24);
+                process_message(msg, 10);
                 processed_message = true;
             }
             if (peek_status_ == 2 && (available() >= 2 || configuration_message_length_ > 0))
