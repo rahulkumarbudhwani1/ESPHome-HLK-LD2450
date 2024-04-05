@@ -303,17 +303,12 @@ namespace esphome::ld2450
             command_last_sent_ = 0;
         }
 
-        if (msg[0] == COMMAND_ENTER_CONFIG && msg[1] == true)
+        if (msg[0] == 0x08 && msg[1] == 0x00)
         {
             configuration_mode_ = true;
         }
 
-        if (msg[0] == COMMAND_LEAVE_CONFIG && msg[1] == true)
-        {
-            configuration_mode_ = false;
-        }
-
-        if ((msg[0] == COMMAND_FACTORY_RESET || msg[0] == COMMAND_RESTART) && msg[1] == true)
+        if ((msg[0] == 0x08 && msg[1] == 0x00) && msg[7] == 0)
         {
             configuration_mode_ = false;
 
@@ -322,36 +317,11 @@ namespace esphome::ld2450
             apply_change_lockout_ = millis();
         }
 
-        if (msg[0] == COMMAND_READ_VERSION && msg[1] == true)
+        if (msg[0] == 0x08 && msg[1] == 0x0)
         {
-            ESP_LOGI(TAG, "Sensor Firmware-Version: V%X.%02X.%02X%02X%02X%02X", msg[7], msg[6], msg[11], msg[10], msg[9], msg[8]);
+            ESP_LOGI(TAG, "Sensor Firmware-Version: V%X.%02X.%02X%02X", msg[2], msg[3], msg[4], msg[5]);
         }
 
-        if (msg[0] == COMMAND_READ_MAC && msg[1] == true)
-        {
-
-            bool bt_enabled = !(msg[4] == 0x08 && msg[5] == 0x05 && msg[6] == 0x04 && msg[7] == 0x03 && msg[8] == 0x02 && msg[9] == 0x01);
-            if (bluetooth_switch_ != nullptr)
-            {
-                bluetooth_switch_->publish_state(bt_enabled);
-            }
-
-            if (bt_enabled)
-            {
-                ESP_LOGI(TAG, "Sensor MAC-Address: %02X:%02X:%02X:%02X:%02X:%02X", msg[4], msg[5], msg[6], msg[7], msg[8], msg[9]);
-            }
-            else
-            {
-                ESP_LOGI(TAG, "Sensor MAC-Address: Bluetooth disabled!");
-            }
-        }
-
-        if (msg[0] == COMMAND_READ_TRACKING_MODE && msg[1] == true)
-        {
-            bool multi_tracking_state = msg[4] == 0x02;
-            if (tracking_mode_switch_ != nullptr)
-                tracking_mode_switch_->publish_state(multi_tracking_state);
-        }
     }
 
     void LD2450::log_sensor_version()
