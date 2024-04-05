@@ -189,30 +189,16 @@ namespace esphome::ld2450
                 process_message(msg, 10);
                 processed_message = true;
             }
-            if (peek_status_ == 2 && (available() >= 2 || configuration_message_length_ > 0))
+            if (peek_status_ == 2 && (available() >= 2 )
             {
-                if (configuration_message_length_ == 0)
-                {
-                    // Read message content length
-                    uint8_t content_length[2];
-                    read_array(content_length, 2);
-                    configuration_message_length_ = content_length[1] << 8 | content_length[0];
-                    // Limit max message length
-                    configuration_message_length_ = std::min(configuration_message_length_, 20);
-                }
 
                 // Wait until message and frame end are available
-                if (available() >= configuration_message_length_ + 4)
+                if (available() >= 10)
                 {
-                    uint8_t msg[configuration_message_length_ + 4] = {0x00};
-                    read_array(msg, configuration_message_length_ + 4);
-
-                    // Assert frame end read correctly
-                    if (msg[configuration_message_length_] == 0x04 && msg[configuration_message_length_ + 1] == 0x03 && msg[configuration_message_length_ + 2] == 0x02 && msg[configuration_message_length_ + 3] == 0x01)
-                    {
-                        process_config_message(msg, configuration_message_length_);
-                    }
-                    configuration_message_length_ = 0;
+                    uint8_t msg[10] = {0x00};
+                    read_array(msg, 10);
+                    process_config_message(msg, configuration_message_length_);
+                    
                     peek_status_ = 0;
                     processed_message = true;
                 }
