@@ -32,6 +32,7 @@ namespace esphome::ld2450
         }
         // Acquire current switch states and update related components
         //read_switch_states();
+        ESP_LOGD("custom", "This is a debug log message with value: %d", 2); 
     }
 
     void LD2450::dump_config()
@@ -51,6 +52,7 @@ namespace esphome::ld2450
     const uint8_t config_header[4] = {0x4D, 0x11, 0x08, 0x00};
     void LD2450::loop()
     {
+        ESP_LOGD("custom", "This is a debug log message with value: %d", 3); 
         // Only process commands if the sensor is not currently restarting / applying changes
         if (!is_applying_changes_ || (is_applying_changes_ && millis() - apply_change_lockout_ > POST_RESTART_LOCKOUT_DELAY))
         {
