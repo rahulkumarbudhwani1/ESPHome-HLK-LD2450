@@ -156,7 +156,7 @@ namespace esphome::ld2450
                 process_message(msg, 10);
                 processed_message = true;
             }
-            if (peek_status_ == 2 && (available() >= 2 )
+            if (peek_status_ == 2 && (available() >= 2 ))
             {
 
                 // Wait until message and frame end are available
